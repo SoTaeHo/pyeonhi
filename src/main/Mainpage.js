@@ -1,29 +1,24 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import ProductList from "./ProductList";
 import "../css/Mainpage.css"
 
 function Mainpage(props) {
-    const [activeTab, setActiveTab] = useState('CU')
-    const [product, setProduct] = useState(null)
-
-    axios.get("http://localhost:4000/main/list").then(function (response) {
-        setProduct(response.data);
-
-    }).catch(function (e) {
-        console.log(e)
-    })
+    const [activeTab, setActiveTab] = useState('cu')
 
     const renderList = () => {
         switch (activeTab) {
-            case 'CU':
-                return <ProductList conv={activeTab}>CU 관련 리스트</ProductList>;
-            case 'GS':
-                return <ProductList conv={activeTab}>GS 관련 리스트</ProductList>;
-            case 'Seven':
-                return <ProductList conv={activeTab}>Seven 관련 리스트</ProductList>;
+            case 'cu':
+                console.log("cu");
+                return <ProductList conv={activeTab}/>;
+            case 'gs':
+                console.log("gs");
+                return <ProductList conv={activeTab}/>;
+            case 'emart':
+                console.log("emart");
+                return <ProductList conv={activeTab}/>;
             default:
-                return <ProductList conv={'CU'}>리스트 선택</ProductList>;
+                return <ProductList conv={'cu'}>리스트 선택</ProductList>;
         }
     };
 
@@ -33,9 +28,9 @@ function Mainpage(props) {
                 <h1>pyeonhi</h1>
             </header>
             <nav>
-                <button onClick={() => setActiveTab('CU')}>CU</button>
-                <button onClick={() => setActiveTab('GS')}>GS</button>
-                <button onClick={() => setActiveTab('Seven')}>Seven</button>
+                <button onClick={() => setActiveTab('cu')}>CU</button>
+                <button onClick={() => setActiveTab('gs')}>GS</button>
+                <button onClick={() => setActiveTab('emart')}>Emart</button>
             </nav>
             <main>
                 {renderList()}

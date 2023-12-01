@@ -2,19 +2,21 @@ import React, { useState, useEffect } from 'react';
 import '../css/ProductList.css';
 import axios from "axios"; // CSS 파일을 import 합니다.
 
-const ProductList = ({ products }) => {
+const ProductList = ({ conv }) => {
 
     const [productList, setProductList] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [active, setActive] = useState(conv);
+
     useEffect(() => {
-        axios.get("http://localhost:4000/main/list").then(function (response) {
+        axios.get(`http://localhost:4000/main/list/${conv}`).then(function (response) {
             setProductList(response.data);
             setLoading(false);
         }).catch(function (e) {
             console.log(e);
             setLoading(true);
         })
-    }, [productList]);
+    }, [conv]);
 
     if (loading) {
         return <div className="product-list-container">로딩중...</div>;
