@@ -3,8 +3,9 @@ const {connectDB} = require("./db");
 const router = express.Router();
 
 router.get("/list", (req, res) => {
-    connectDB.query('SELECT * FROM cu', (error, result) => {
+    connectDB.query('SELECT * FROM cu LIMIT 10', (error, result) => {
         if (error) return console.log(error, 'check');
+
         res.send(result)
     })
 })
